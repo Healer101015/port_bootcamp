@@ -2,200 +2,483 @@
 <html lang="pt-br">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Generation Brasil">
-    <meta name="description" content="Portfólio da Generation Brasil, 
-                desenvolvedor Full Stack especializado em criar experiências 
-                digitais incríveis. Conheça meus projetos e entre em contato.">
-    <meta name="robots" content="index, follow">
+    <meta name="author" content="João Henrique Brito">
+    <meta name="description"
+        content="Portfólio de João Henrique Brito, Desenvolvedor Full-stack especializado em React, Node.js, NestJS e arquiteturas modernas.">
+    <meta name="keywords"
+        content="João Henrique Brito, Full-stack, React, NestJS, TypeScript, FATEC Itaquera, Desenvolvedor">
+
+    <meta property="og:title" content="João Henrique Brito | Full-stack Developer">
+    <meta property="og:description"
+        content="Transformando ideias complexas em experiências digitais de alta performance.">
+    <meta property="og:type" content="website">
 
     <link rel="icon" type="image/svg+xml" href="./assets/img/favicon.svg">
+    <title>João Brito | Full-stack Developer</title>
 
-    <title>Portfólio Generation Brasil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* Variáveis de Estilo - Estética Glassmorphism */
+        :root {
+            --bg: #030712;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --primary: #38bdf8;
+            --secondary: #818cf8;
+            --text-main: #f9fafb;
+            --text-dim: #9ca3af;
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Header e Navegação */
+        header {
+            padding: 1.5rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .menu-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        #titulo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .menu-list {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .menu-list a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: 0.3s;
+            opacity: 0.8;
+        }
+
+        .menu-list a:hover {
+            opacity: 1;
+            color: var(--primary);
+        }
+
+        /* Seção Hero */
+        .hero-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10%;
+            background: radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.05), transparent);
+        }
+
+        .hero-content {
+            max-width: 650px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .badge {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            margin-bottom: 2.5rem;
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        /* Botões */
+        .botao {
+            background: var(--primary);
+            color: #030712;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            border: none;
+        }
+
+        .botao:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px -10px var(--primary);
+        }
+
+        .botao-outline {
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: 0.3s;
+            background: var(--card-bg);
+        }
+
+        .botao-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Seções Gerais */
+        .section-container {
+            padding: 100px 10%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3.5rem;
+            text-align: center;
+        }
+
+        /* Sobre Mim */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-dim);
+        }
+
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 2rem;
+        }
+
+        .tag {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--text-main);
+        }
+
+        /* Grelha de Projetos */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: 0.4s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .project-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .project-card p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Formulário de Contacto */
+        .contact-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            padding: 3rem;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: var(--glass-shadow);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        input,
+        textarea {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            padding: 1rem;
+            border-radius: 10px;
+            color: white;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 4rem;
+            color: var(--text-dim);
+            border-top: 1px solid var(--glass-border);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+                justify-content: center;
+            }
+
+            .menu-list {
+                display: none;
+            }
+
+            .buttons-container {
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Cabeçalho da Página (header) -->
+
     <header>
-
         <div class="menu-content">
-
-            <!-- TÍTULO -->
-            <a href="index.html" id="titulo">Portfólio</a>
-
-            <!-- MENU -->
+            <a href="index.html" id="titulo">JB.dev</a>
             <nav>
                 <ul class="menu-list">
                     <li><a href="#hero">Início</a></li>
                     <li><a href="#about">Sobre</a></li>
                     <li><a href="#projects">Projetos</a></li>
-                    <li><a href="#contact">Contato</a></li>
+                    <li><a href="#contact">Contacto</a></li>
                 </ul>
             </nav>
-
         </div>
-
     </header>
 
-    <!-- Seção Principal da Página (main) -->
     <main>
-
-        <!-- Seção de Boas vindas -->
-        <section id="hero" class="section-container hero-container">
-
-            <!-- BOAS VINDAS -->
+        <section id="hero" class="hero-container">
             <article class="hero-content">
-
-                <span>👋 Olá, eu sou a Generation Brasil</span>
-                <h1>Desenvolvedor Full Stack</h1>
-                <p>Transformo ideias em código e crio experiências digitais incríveis.</p>
+                <span class="badge">Estudante @ FATEC Itaquera</span>
+                <h1>João Henrique Brito</h1>
+                <p>Desenvolvedor Full-stack criando experiências digitais românticas, complexas e de alta performance.
+                    Especialista em ecossistemas React e NestJS.</p>
 
                 <div class="buttons-container">
-                    <a href="#contact" class="botao">Entre em Contato</a>
-                    <a href="#about" class="botao-outline">Saiba Mais...</a>
-                </div>
-
-            </article>
-
-            <!-- IMAGEM -->
-            <figure class="hero-image">
-                <img src="./assets/img/foto_dev_man.svg" alt="Foto do autor." class="float-animation">
-            </figure>
-
-        </section>
-
-        <!-- Seção Sobre o autor -->
-        <section id="about" class="section-container about-container">
-
-            <figure class="about-image">
-                <img src="./assets/img/avatar_dev_man.svg" alt="Foto do perfil">
-            </figure>
-
-            <article class="about-content">
-                <h2>Sobre mim</h2>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta assumenda, quasi sit reiciendis nihil
-                    id enim facilis iste exercitationem nostrum minus ipsa neque officia dolorum ea optio est quis
-                    magni.</p>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta assumenda, quasi sit reiciendis nihil
-                    id enim facilis iste exercitationem nostrum minus ipsa neque officia dolorum ea optio est quis
-                    magni.</p>
-
-                <div class="about-buttons-data">
-                    <div class="buttons-container">
-                        <a href="#" target="_blank" class="botao">GitHub</a>
-                        <a href="#" target="_blank" class="botao-outline">Currículo</a>
-                    </div>
-
-                    <div class="data-container">
-                        <div class="data-item">
-                            <span class="data-number">100</span>
-                            <span class="data-label">Seguidores</span>
-                        </div>
-                        <div class="data-item">
-                            <span class="data-number">10</span>
-                            <span class="data-label">Repositórios</span>
-                        </div>
-                    </div>
+                    <a href="#contact" class="botao">Vamos Conversar</a>
+                    <a href="#projects" class="botao-outline">Ver Projetos</a>
                 </div>
             </article>
 
+            <figure style="animation: float 4s ease-in-out infinite;">
+                <img src="./assets/img/foto_dev_man.svg" alt="Avatar de João Brito" width="350">
+            </figure>
         </section>
 
-        <!-- Seção Projetos do autor -->
-        <section id="projects" class="section-container projects-container">
-            <h2>Meus Projetos</h2>
+        <section id="about" class="section-container">
+            <h2>Sobre Mim</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>Atualmente a cursar Análise e Desenvolvimento de Sistemas na <strong>FATEC Itaquera</strong>,
+                        foco a minha energia na construção de arquiteturas escaláveis e interfaces com design
+                        minimalista.</p>
+                    <p>O meu trabalho une o rigor técnico do back-end (NestJS, Node.js, MySQL) com a sensibilidade
+                        estética do front-end (React, TypeScript), sempre priorizando a performance e a experiência do
+                        utilizador.</p>
 
-            <!-- Swiper Container -->
-            <div class="swiper projects-swiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-
-                        <article class="project-card">
-                            <div class="project-image">
-                                <img src="./assets/icons/languages/github.svg" alt="Ícone GitHub" />
-                            </div>
-
-                            <div class="project-content">
-                                <h3>Projeto Github</h3>
-                                <p>Projeto Desenvolvido no GitHub</p>
-                                <div class="project-tags">
-                                    <span class="tag">GitHub</span>
-                                </div>
-                                <div class="project-buttons">
-                                    <a href="#" target="_blank" class="botao botao-sm">
-                                        GitHub
-                                    </a>
-                                    <a href="#" target="_blank" class="botao-outline botao-sm">
-                                        Deploy
-                                    </a>
-                                </div>
-                            </div>
-
-                        </article>
+                    <div class="skills-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">NestJS</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">MongoDB</span>
+                        <span class="tag">Docker</span>
                     </div>
                 </div>
-
-                <!-- Botões de navegação -->
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-
-                <!-- Paginação -->
-                <div class="swiper-pagination"></div>
+                <div class="about-stats" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="project-card" style="text-align: center;">
+                        <span style="font-size: 2rem; font-weight: 800; color: var(--primary);">+10</span>
+                        <p>Repositórios</p>
+                    </div>
+                    <div class="project-card" style="text-align: center;">
+                        <span style="font-size: 2rem; font-weight: 800; color: var(--secondary);">100%</span>
+                        <p>Focado</p>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Seção Formulário de Contato e Redes Sociais -->
-        <section id="contact" class="section-container contact-container">
+        <section id="projects" class="section-container">
+            <h2>Projetos Selecionados</h2>
+            <div class="projects-grid">
 
-            <!-- REDES SOCIAIS -->
-            <article class="contact-info">
-                <h2>Entre em Contato</h2>
-                <p>Sinta-se à vontade para entrar em contato comigo!</p>
+                <article class="project-card">
+                    <div>
+                        <h3>React Builder Pro</h3>
+                        <p>Visual drag-and-drop builder que gera código React e Vite pronto para produção.</p>
+                    </div>
+                    <a href="https://github.com/Healer101015" target="_blank" class="botao-outline"
+                        style="text-align: center;">Ver no GitHub</a>
+                </article>
 
-                <div class="social-container">
-                    <a href="#" target="_blank" class="social-icon" aria-label="LinkedIn">
-                        <img src="./assets/icons/social/linkedin.svg" alt="Link para o Linkedin">
-                    </a>
-                    <a href="#" target="_blank" class="social-icon" aria-label="GitHub">
-                        <img src="./assets/icons/social/github.svg" alt="Link para o GitHub">
-                    </a>
-                    <a href="#" target="_blank" class="social-icon" aria-label="Instagram">
-                        <img src="./assets/icons/social/instagram.svg" alt="Link para o Instagram">
-                    </a>
-                </div>
-            </article>
+                <article class="project-card">
+                    <div>
+                        <h3>Doodle Tasks</h3>
+                        <p>Gestor de tarefas com integração MongoDB e gerador de avatares customizados para cada
+                            utilizador.</p>
+                    </div>
+                    <a href="https://github.com/Healer101015" target="_blank" class="botao-outline"
+                        style="text-align: center;">Ver no GitHub</a>
+                </article>
 
-            <!-- FORMULÁRIO -->
-            <form id="formulario">
+                <article class="project-card">
+                    <div>
+                        <h3>SOLVPLACE</h3>
+                        <p>Landing page profissional para assistência técnica de eletrónicos, focada em conversão e
+                            branding solvB.</p>
+                    </div>
+                    <a href="https://github.com/Healer101015" target="_blank" class="botao-outline"
+                        style="text-align: center;">Ver no GitHub</a>
+                </article>
 
-                <label for="nome">Nome</label>
-                <input id="nome" name="nome" type="text" placeholder="Digite o seu nome completo">
-                <span id="erro-nome"></span>
-
-                <label for="email">E-mail</label>
-                <input id="email" name="email" type="text" placeholder="Digite o seu e-mail">
-                <span id="erro-email"></span>
-
-                <label for="assunto">Assunto</label>
-                <input id="assunto" name="assunto" type="text" placeholder="Digite o assunto da mensagem">
-                <span id="erro-assunto"></span>
-
-                <label for="mensagem">Mensagem</label>
-                <textarea id="mensagem" name="mensagem" placeholder="Escreva a sua mensagem aqui..."></textarea>
-                <span id="erro-mensagem"></span>
-
-                <button class="botao" type="submit">Enviar Mensagem</button>
-            </form>
-
+            </div>
         </section>
 
+        <section id="contact" class="section-container">
+            <div class="glass-card">
+                <h2 style="margin-bottom: 2rem; text-align: left;">Inicie um Projeto</h2>
+                <form id="formulario" action="success.html">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <input type="text" name="nome" placeholder="Seu Nome" required>
+                        <input type="email" name="email" placeholder="Seu E-mail" required>
+                    </div>
+                    <input type="text" name="assunto" placeholder="Assunto">
+                    <textarea name="mensagem" rows="5"
+                        placeholder="Como posso ajudar no seu próximo desafio?"></textarea>
+                    <button type="submit" class="botao">Enviar Mensagem</button>
+                </form>
+            </div>
+        </section>
     </main>
 
-    <!-- Rodapé da Página (footer) -->
     <footer>
-        Desenvolvido por Generation Brasil - 2026
+        <p>&copy; 2026 João Henrique Brito. Desenvolvido com foco, código e café.</p>
+        <div style="margin-top: 1rem;">
+            <a href="https://github.com/Healer101015" target="_blank"
+                style="color: var(--text-dim); margin: 0 10px;">GitHub</a>
+            <a href="#" style="color: var(--text-dim); margin: 0 10px;">LinkedIn</a>
+        </div>
     </footer>
 
 </body>
